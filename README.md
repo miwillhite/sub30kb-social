@@ -9,7 +9,7 @@ Auto-posting pipeline for SubThirtyKB (@sub30kb).
 2. **render.py**: renders each post to PNGs in `out/<id>/` using `templates/` (Barlow fonts from `node_modules/@fontsource`).
 3. **Commit + push**: images get public URLs at
    `https://raw.githubusercontent.com/miwillhite/sub30kb-social/main/out/<id>/NN.png`.
-4. **Buffer**: a weekly Claude scheduled task creates *drafts* in the sub30kb Buffer account
+4. **Buffer**: a Claude scheduled task (Thursdays 7:35 AM PT) creates *drafts* in the sub30kb Buffer account
    (Instagram + Threads; TikTok as photo posts) for the coming week. Matt approves them in the Buffer app.
 
 ## Weekly routine (what the scheduled task does)
@@ -18,7 +18,8 @@ Auto-posting pipeline for SubThirtyKB (@sub30kb).
   following the cadence, and flag any new Sub-10 that needs a test run.
 - `npm ci && python3 render.py --from <next Mon> --to <next Sun>`
 - commit + push `out/`
-- create one Buffer draft per post per channel, `customScheduled` at 6:30 AM PT on the post date, `saveToDraft: true`.
+- create one Buffer draft per post per channel, `customScheduled` at 6:30 AM PT on weekdays / 7:30 on weekends, `saveToDraft: true`.
+  Threads gets only `#kettlebell` (Threads tags one topic per post).
 
 ## Local use
 
