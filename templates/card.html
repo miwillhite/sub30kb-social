@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}
+<div class="root ink" style="width:1080px;height:1350px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">{{ badge(true) }}<div class="kicker muted">{{ p.kicker or 'Workout of the week' }}</div></div>
+  <h1 class="h1" style="margin-top:64px">{{ p.headline|safe }}</h1>
+  <div style="margin-top:32px">{{ chips(p.tags) }}</div>
+  <div class="rows" style="margin-top:48px">
+    {% for m in p.moves %}<div class="row"><span class="n">{{ m[0] }}</span><span class="r muted">{{ m[1] }}</span></div>{% endfor %}
+  </div>
+  <p class="body" style="margin-top:40px"><span class="acc" style="font-weight:600">{{ p.instruction_lead }}</span> {{ p.instruction_rest }}</p>
+  <div class="foot">{{ wordmark() }}<span class="url muted">subthirtykb.com</span></div>
+</div>
+{% endblock %}

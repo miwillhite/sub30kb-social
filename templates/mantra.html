@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}
+<div class="root bone" style="width:1080px;height:1080px">
+  <div>{{ badge(false) }}</div>
+  <p class="cond" style="margin:auto 0;font-weight:800;font-size:150px;line-height:.88;letter-spacing:-.02em;text-transform:uppercase">{{ p.line_html|safe }}</p>
+  <div class="foot" style="margin-top:0">{{ wordmark() }}<span class="url muted">subthirtykb.com</span></div>
+</div>
+{% endblock %}

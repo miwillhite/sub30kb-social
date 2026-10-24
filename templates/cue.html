@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block content %}
+<div class="root bone" style="width:1080px;height:1080px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">{{ badge(false) }}<div class="kicker muted">Form cue</div></div>
+  <div style="margin:auto 0;display:flex;flex-direction:column;gap:40px">
+    <span class="chip" style="align-self:flex-start">{{ p.tag }}</span>
+    <p class="cond" style="margin:0;font-weight:800;font-size:84px;line-height:.95;letter-spacing:-.01em">{{ p.line_a }} <span class="acc">{{ p.line_b }}</span></p>
+  </div>
+  <div class="foot" style="margin-top:0">{{ wordmark() }}<span class="url muted">subthirtykb.com</span></div>
+</div>
+{% endblock %}

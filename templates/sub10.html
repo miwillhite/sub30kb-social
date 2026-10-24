@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block content %}
+<div class="root ink" style="width:1080px;height:1080px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">{{ badge(true) }}<div class="kicker muted">Friday quick hit</div></div>
+  <div style="margin-top:48px;display:flex;align-items:flex-end;gap:20px">
+    <span class="cond acc" style="font-weight:800;font-size:{{ 300 if p.moves|length > 4 else 360 }}px;line-height:.78;letter-spacing:-.04em">{{ p.hero }}</span>
+    <span class="cond" style="font-weight:800;font-size:72px;line-height:.9;text-transform:uppercase;padding-bottom:8px">min<br><span class="muted" style="font-size:32px;font-weight:700;letter-spacing:.1em">{{ p.format|safe }}</span></span>
+  </div>
+  <div class="cond" style="display:flex;flex-direction:column;gap:8px;margin-top:{{ 36 if p.moves|length > 4 else 56 }}px;font-weight:800;font-size:{{ 48 if p.moves|length > 4 else 64 }}px;line-height:.92;text-transform:uppercase">
+    {% for m in p.moves %}<div style="display:flex;gap:24px;align-items:baseline"><span class="muted" style="font-size:36px;font-weight:700;width:60px">{{ m[1] }}</span><span>{{ m[0] }}</span></div>{% endfor %}
+  </div>
+  <div class="foot" style="padding-top:24px">
+    <div class="chips">{% for t in p.tags %}<span class="chip" style="padding:10px 18px;font-size:20px">{{ 'Full body' if t|upper=='FULL' else t }}</span>{% endfor %}</div>
+    <span class="url muted">subthirtykb.com</span>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Barlow Condensed';font-weight:700;src:url('{{fonts}}/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2')}
+@font-face{font-family:'Barlow Condensed';font-weight:800;src:url('{{fonts}}/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2')}
+@font-face{font-family:'Barlow';font-weight:500;src:url('{{fonts}}/barlow/files/barlow-latin-500-normal.woff2')}
+@font-face{font-family:'Barlow';font-weight:600;src:url('{{fonts}}/barlow/files/barlow-latin-600-normal.woff2')}
+body{margin:0;font-family:'Barlow',sans-serif}
+.cond{font-family:'Barlow Condensed',sans-serif}
+.root{box-sizing:border-box;padding:96px;display:flex;flex-direction:column}
+.ink{background:#15171A;color:#F3F1EA}.bone{background:#F3F1EA;color:#15171A}
+.kicker{font-family:'Barlow Condensed';font-weight:700;font-size:24px;line-height:1.2;letter-spacing:.14em;text-transform:uppercase;padding-top:8px}
+.ink .muted{color:#B8B5AC}.bone .muted{color:#4A4D52}
+.chips{display:flex;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:22px;line-height:24px;letter-spacing:.08em;text-transform:uppercase}
+.ink .chip{background:#1F2226}.bone .chip{background:#E9E6DC}
+.dots{display:inline-flex;gap:4px}.dots i{width:10px;height:10px;border-radius:50%;box-sizing:border-box;border:2px solid currentColor}.dots i.on{background:currentColor}
+.h1{margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:104px;line-height:.9;letter-spacing:-.01em;text-transform:uppercase}
+.rows{display:flex;flex-direction:column}
+.ink .rows,.ink .row{border-color:#33373D}.bone .rows,.bone .row{border-color:#D9D6CC}
+.rows{border-top:1px solid}.row{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0;border-bottom:1px solid}
+.row .n{font-family:'Barlow Condensed';font-weight:800;font-size:40px;line-height:1;text-transform:uppercase}
+.row .r{font-weight:600;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.body{font-weight:500;font-size:30px;line-height:40px;max-width:780px;margin:0}
+.acc{color:#EE4F1A}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center}
+.word{font-family:'Barlow Condensed';font-weight:800;font-size:32px;line-height:1;text-transform:uppercase}
+.url{font-weight:500;font-size:24px;line-height:1}
+</style></head><body>
+{% macro badge(dark) -%}
+{% set tile = '#F3F1EA' if dark else '#15171A' %}{% set fg = '#15171A' if dark else '#F3F1EA' %}
+<svg viewBox="0 0 96 96" width="96" height="96"><rect width="96" height="96" rx="22" fill="{{tile}}"/>
+<svg x="24" y="14" width="48.1" height="68" viewBox="42 26 116 164">
+<path d="M58 100 L58 78 A42 42 0 0 1 142 78 L142 100" fill="none" stroke="{{fg}}" stroke-width="20" stroke-linecap="round"/>
+<circle cx="100" cy="132" r="58" fill="{{fg}}"/><path d="M100 74 A58 58 0 0 1 100 190 Z" fill="#EE4F1A"/>
+<circle cx="100" cy="132" r="7" fill="{{tile}}"/></svg></svg>
+{%- endmacro %}
+{% macro chips(tags) -%}
+<div class="chips">{% for t in tags %}<span class="chip">{% if t|upper in ['LIGHT','MED','HEAVY'] %}<span class="dots">{% set n = {'LIGHT':1,'MED':2,'HEAVY':3}[t|upper] %}{% for i in range(3) %}<i class="{{ 'on' if i < n }}"></i>{% endfor %}</span>{% endif %}{{ 'Full body' if t|upper=='FULL' else t }}</span>{% endfor %}</div>
+{%- endmacro %}
+{% macro wordmark() %}<span class="word">SubThirty<span class="acc">KB</span></span>{% endmacro %}
+{% block content %}{% endblock %}
+</body></html>
