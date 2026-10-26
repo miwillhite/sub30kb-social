@@ -1,12 +1,14 @@
 {% extends "base.html" %}{% block content %}
-<div class="root ink" style="width:1080px;height:1350px">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start">{{ badge(true) }}<div class="kicker muted">{{ p.kicker or 'Workout of the week' }}</div></div>
-  <h1 class="h1" style="margin-top:64px">{{ p.headline|safe }}</h1>
-  <div style="margin-top:32px">{{ chips(p.tags) }}</div>
-  <div class="rows" style="margin-top:48px">
-    {% for m in p.moves %}<div class="row"><span class="n">{{ m[0] }}</span><span class="r muted">{{ m[1] }}</span></div>{% endfor %}
-  </div>
-  <p class="body" style="margin-top:40px"><span class="acc" style="font-weight:600">{{ p.instruction_lead }}</span> {{ p.instruction_rest }}</p>
-  <div class="foot">{{ wordmark() }}<span class="url muted">subthirtykb.com</span></div>
+{#- hero: p.hero (minutes) if given, else the round count from instruction_lead ("5 rounds.") -#}
+{% set lead = (p.instruction_lead or '')|replace('.','')|trim %}
+{% set n = p.hero if p.hero else lead.split(' ')[0] %}
+{% set label = p.hero_label if p.hero_label else ('MIN' if p.hero else lead.split(' ')[1:]|join(' ')) %}
+<div class="root bone" style="width:1080px;height:1350px">
+  {{ top(p.tags, p.kicker) }}
+  <div style="margin-top:56px">{{ hero(n, label) }}</div>
+  <h1 class="h1" style="margin-top:40px">{{ p.headline|safe }}</h1>
+  <div style="margin-top:48px">{{ ledger(p.moves) }}</div>
+  {% if p.instruction_rest %}<p class="body muted" style="margin-top:28px;margin-bottom:32px">{{ p.instruction_rest }}</p>{% endif %}
+  {{ foot(false) }}
 </div>
 {% endblock %}

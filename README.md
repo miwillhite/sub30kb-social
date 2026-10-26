@@ -6,7 +6,12 @@ Auto-posting pipeline for SubThirtyKB (@sub30kb).
 
 1. **posts.json**: the content queue. One entry per post (date, type, on-image fields, caption).
    Types match the approved Instagram designs: `card` (Mon), `carousel` (Wed), `sub10` (Fri), `cue` / `mantra` (weekend).
-2. **render.py**: renders each post to PNGs in `out/<id>/` using `templates/` (Barlow fonts from `node_modules/@fontsource`).
+2. **render.py**: renders each post to PNGs in `out/<id>/` using `templates/` (Bebas Neue + Barlow from `node_modules/@fontsource`).
+   Templates follow **design system v2** (Oct 25 2026): bone ground on every feed post, Bebas Neue display, the workout as a
+   "ledger" (number first in a fixed left column, in ink, never orange), one orange element per post (the hero number),
+   time tag as an inverted pill top-right, badge lockup + `@sub30kb` in the footer.
+   Content rules: per-side work is written `5/5`; carries and holds are in seconds (`30s` renders as `30 S`), never meters.
+   Cards take an optional `hero`/`hero_label` (minutes); otherwise the hero is the round count from `instruction_lead`.
 3. **Commit + push**: images get public URLs at
    `https://raw.githubusercontent.com/miwillhite/sub30kb-social/main/out/<id>/NN.png`.
 4. **Buffer**: a Claude scheduled task (Thursdays 7:35 AM PT) creates *drafts* in the sub30kb Buffer account

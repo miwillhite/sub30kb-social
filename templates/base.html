@@ -1,43 +1,58 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
 <style>
-@font-face{font-family:'Barlow Condensed';font-weight:700;src:url('{{fonts}}/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2')}
-@font-face{font-family:'Barlow Condensed';font-weight:800;src:url('{{fonts}}/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2')}
+@font-face{font-family:'Bebas Neue';font-weight:400;src:url('{{fonts}}/bebas-neue/files/bebas-neue-latin-400-normal.woff2')}
 @font-face{font-family:'Barlow';font-weight:500;src:url('{{fonts}}/barlow/files/barlow-latin-500-normal.woff2')}
 @font-face{font-family:'Barlow';font-weight:600;src:url('{{fonts}}/barlow/files/barlow-latin-600-normal.woff2')}
+/* SubThirtyKB design system v2: bone ground, Bebas Neue display, ink ledger numbers, one orange per post. */
 body{margin:0;font-family:'Barlow',sans-serif}
-.cond{font-family:'Barlow Condensed',sans-serif}
+.disp{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400}
 .root{box-sizing:border-box;padding:96px;display:flex;flex-direction:column}
-.ink{background:#15171A;color:#F3F1EA}.bone{background:#F3F1EA;color:#15171A}
-.kicker{font-family:'Barlow Condensed';font-weight:700;font-size:24px;line-height:1.2;letter-spacing:.14em;text-transform:uppercase;padding-top:8px}
-.ink .muted{color:#B8B5AC}.bone .muted{color:#4A4D52}
-.chips{display:flex;gap:12px;flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:22px;line-height:24px;letter-spacing:.08em;text-transform:uppercase}
-.ink .chip{background:#1F2226}.bone .chip{background:#E9E6DC}
-.dots{display:inline-flex;gap:4px}.dots i{width:10px;height:10px;border-radius:50%;box-sizing:border-box;border:2px solid currentColor}.dots i.on{background:currentColor}
-.h1{margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:104px;line-height:.9;letter-spacing:-.01em;text-transform:uppercase}
-.rows{display:flex;flex-direction:column}
-.ink .rows,.ink .row{border-color:#33373D}.bone .rows,.bone .row{border-color:#D9D6CC}
-.rows{border-top:1px solid}.row{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0;border-bottom:1px solid}
-.row .n{font-family:'Barlow Condensed';font-weight:800;font-size:40px;line-height:1;text-transform:uppercase}
-.row .r{font-weight:600;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
-.body{font-weight:500;font-size:30px;line-height:40px;max-width:780px;margin:0}
+.bone{background:#F3F1EA;color:#15171A}.ink{background:#15171A;color:#F3F1EA}
+.bone .muted{color:#4A4D52}.ink .muted{color:#B8B5AC}
 .acc{color:#EE4F1A}
-.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center}
-.word{font-family:'Barlow Condensed';font-weight:800;font-size:32px;line-height:1;text-transform:uppercase}
-.url{font-weight:500;font-size:24px;line-height:1}
+.top{display:flex;justify-content:space-between;align-items:center}
+.kicker{font-family:'Bebas Neue',Impact,sans-serif;font-size:22px;line-height:1.2;letter-spacing:.14em;text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:999px;font-weight:600;font-size:20px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.bone .pill{background:#15171A;color:#F3F1EA}.ink .pill{background:#F3F1EA;color:#15171A}
+.hero{display:flex;align-items:last baseline;gap:20px}
+.hero .n{font-family:'Bebas Neue',Impact,sans-serif;font-size:300px;line-height:.8;letter-spacing:-.02em;color:#EE4F1A}
+.hero .l{font-family:'Bebas Neue',Impact,sans-serif;font-size:64px;line-height:1;letter-spacing:.06em;text-transform:uppercase}
+.h1{margin:0;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:96px;line-height:.9;text-transform:uppercase}
+.ledger{display:flex;flex-direction:column;border-top:4px solid currentColor}
+.row{display:flex;align-items:center;gap:16px;height:88px;border-bottom:2px solid}
+.bone .row{border-color:#D6D1C4}.ink .row{border-color:#33373D}
+.row .n{width:150px;flex-shrink:0;font-family:'Bebas Neue',Impact,sans-serif;font-size:60px;line-height:1}
+.row .n small{font-size:36px;letter-spacing:.04em}
+.row .m{font-weight:600;font-size:36px;line-height:1.1}
+.body{font-weight:500;font-size:30px;line-height:40px;max-width:780px;margin:0}
+.foot{margin-top:auto;}.root>.h1[style*='margin:auto']~.foot{margin-top:0;}.foot{display:flex;justify-content:space-between;align-items:center}
+.lock{display:flex;align-items:center;gap:16px}
+.word{font-family:'Bebas Neue',Impact,sans-serif;font-size:34px;line-height:1;letter-spacing:.04em;text-transform:uppercase}
+.handle{font-weight:600;font-size:22px;letter-spacing:.08em;text-transform:uppercase}
 </style></head><body>
-{% macro badge(dark) -%}
-{% set tile = '#F3F1EA' if dark else '#15171A' %}{% set fg = '#15171A' if dark else '#F3F1EA' %}
-<svg viewBox="0 0 96 96" width="96" height="96"><rect width="96" height="96" rx="22" fill="{{tile}}"/>
+{%- macro tile(dark) -%}
+{% set bg = '#F3F1EA' if dark else '#15171A' %}{% set fg = '#15171A' if dark else '#F3F1EA' %}
+<svg viewBox="0 0 96 96" width="56" height="56" aria-hidden="true"><rect width="96" height="96" rx="22" fill="{{bg}}"/>
 <svg x="24" y="14" width="48.1" height="68" viewBox="42 26 116 164">
 <path d="M58 100 L58 78 A42 42 0 0 1 142 78 L142 100" fill="none" stroke="{{fg}}" stroke-width="20" stroke-linecap="round"/>
 <circle cx="100" cy="132" r="58" fill="{{fg}}"/><path d="M100 74 A58 58 0 0 1 100 190 Z" fill="#EE4F1A"/>
-<circle cx="100" cy="132" r="7" fill="{{tile}}"/></svg></svg>
-{%- endmacro %}
-{% macro chips(tags) -%}
-<div class="chips">{% for t in tags %}<span class="chip">{% if t|upper in ['LIGHT','MED','HEAVY'] %}<span class="dots">{% set n = {'LIGHT':1,'MED':2,'HEAVY':3}[t|upper] %}{% for i in range(3) %}<i class="{{ 'on' if i < n }}"></i>{% endfor %}</span>{% endif %}{{ 'Full body' if t|upper=='FULL' else t }}</span>{% endfor %}</div>
-{%- endmacro %}
-{% macro wordmark() %}<span class="word">SubThirty<span class="acc">KB</span></span>{% endmacro %}
+<circle cx="100" cy="132" r="7" fill="{{bg}}"/></svg></svg>
+{%- endmacro -%}
+{%- macro lockup(dark) -%}<span class="lock">{{ tile(dark) }}<span class="word">SubThirty<span class="acc">KB</span></span></span>{%- endmacro -%}
+{%- macro foot(dark, right) -%}<div class="foot">{{ lockup(dark) }}{{ right if right else '<span class="handle muted">@sub30kb</span>'|safe }}</div>{%- endmacro -%}
+{#- top row: gear/weight kicker left, time tag as inverted pill right -#}
+{%- macro top(tags, kicker) -%}
+{% set ns = namespace(time=None, rest=[]) %}
+{% for t in tags or [] %}{% if (t|upper|trim)[:3] == 'SUB' %}{% set ns.time = t %}{% else %}{% set ns.rest = ns.rest + [('FULL BODY' if t|upper == 'FULL' else t|upper)] %}{% endif %}{% endfor %}
+<div class="top"><span class="kicker muted">{{ kicker if kicker else ns.rest|join(' · ') }}</span>{% if ns.time %}<span class="pill">{{ ns.time }}</span>{% endif %}</div>
+{%- endmacro -%}
+{#- hero number beside a stacked label; the number's baseline sits on the label's LAST line -#}
+{%- macro hero(n, label) -%}<div class="hero"><span class="n">{{ n }}</span><span class="l">{{ label|safe }}</span></div>{%- endmacro -%}
+{#- rep strings: "5/5" stays, a trailing unit letter becomes a small suffix ("30s" -> 30 S). Never meters. -#}
+{%- macro rep(r) -%}{% set r = r|string|trim %}{% if r[-1:]|lower in ['s'] and r[:-1]|trim|int(-1) >= 0 %}{{ r[:-1]|trim }} <small class="muted">S</small>{% else %}{{ r }}{% endif %}{%- endmacro -%}
+{%- macro ledger(moves) -%}
+<div class="ledger">{% for m in moves %}<div class="row"><span class="n">{{ rep(m[1]) }}</span><span class="m">{{ m[0] }}</span></div>{% endfor %}</div>
+{%- endmacro -%}
 {% block content %}{% endblock %}
 </body></html>
